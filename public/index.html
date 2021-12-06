@@ -33,12 +33,13 @@
     <!--     VRM Loader for Three.js -->
     <script src="https://unpkg.com/@pixiv/three-vrm@0.6.7/lib/three-vrm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.0.0/dist/kalidokit.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 </head>
 
 <body>
     <navbar>
-        <div class="logo">QuickMeet</div>
+        <div class="logo">VR Call</div>
     </navbar>
     <!-- <div class="landing"> -->
         <!-- <div class="head-cont unselectable">
@@ -47,11 +48,19 @@
 
         <div class="main">
             <div class="create-join">
-                <div class="text"><div class="head">Create Video Meetings in one-click.</div>
-                <div class="subtext">No sign ups required. Open Source platform.</div>
+                <div class="text"><div class="head">Create VR Video Meetings in one-click.</div>
+                <div class="subtext">If you cannot see VR character under the video, Please upload vrm image with yourname(ex. tatsuro.vrm)</div>
                 </div>
                 <button id="createroom" class="createroom-butt unselectable">Create Room</button><br>
                 <input type="text" name="room" spellcheck="false" placeholder="Enter Room Code" id="roomcode" class="roomcode"><br>
+                <img id="thumbnail">
+                <div id="attachment">
+                    <input type="file" name="vrm" id="vrmfile"/>
+                </div>
+                <!--<div>
+                    <input type="text" name="username" id="name-field"/>
+                    <button id="checkbutton">Check</button>
+                </div>-->
                 <div class="joinroom unselectable" id="joinroom">Join Room</div>
             </div>
             <div class="video-cont">
@@ -79,6 +88,7 @@
     <!-- </div> -->
 
     <script src="js/landing.js"></script>
+    <script src="js/vrmThumbnail.js"></script>
 </body>
 
 </html>

@@ -649,7 +649,7 @@ navbar .logo {
   outline: none;
 }
 .container-room .right-cont {
-  width: 30%;
+  width: 20%;
   background-color: #ffffff;
   height: 100vh;
   /* Track */
@@ -803,5 +803,7 @@ navbar .logo {
   visibility: visible;
   opacity: 0.8;
 }
+
+
 
 /*# sourceMappingURL=style.css.map */

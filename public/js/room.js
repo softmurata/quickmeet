@@ -24,25 +24,26 @@ const mediapipeCtx = mediapipeCanvas.getContext("2d");
 let micAllowed = 1;
 let camAllowed = 1;
 
-const holistic = new Holistic({locateFile: (file) => {
-    return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
-}});
-
-
-holistic.setOptions({
-    modelComplexity: 1,
-    smoothLandmarks: true,
-    enableSegmentation: true,
-    smoothSegmentation: true,
-    refineFaceLandmarks: true,
-    minDetectionConfidence: 0.5,
-    minTrackingConfidence: 0.5
-});
-holistic.onResults(onResults);
-
 const videoElement = document.createElement("video");
 
 function getMediapipeStream(localstream, video, audio){
+    const holistic = new Holistic({locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/holistic/${file}`;
+    }});
+    
+    
+    holistic.setOptions({
+        modelComplexity: 1,
+        smoothLandmarks: true,
+        enableSegmentation: true,
+        smoothSegmentation: true,
+        refineFaceLandmarks: true,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5
+    });
+    holistic.onResults(onResults);
+
+
     videoElement.srcObject = localstream;
     const camera = new Camera(videoElement, {
         onFrame: async () => {
@@ -124,8 +125,19 @@ animate();
 /* VRM Character Setup */
 const loader = new THREE.GLTFLoader();
 loader.crossOrigin = "anonymous";
+/*
+let fileurl = undefined // "https://cdn.glitch.com/29e07830-2317-4b15-a044-135e73c7f840%2FAshtra.vrm?v=1630342336981";
 
-loader.load("https://cdn.glitch.com/29e07830-2317-4b15-a044-135e73c7f840%2FAshtra.vrm?v=1630342336981",
+if (nameField.value !== ""){
+    let vrmvariables = {
+        username: nameField.value
+    }
+    let response = axios.post("http://localhost:3000/api/preview/getvrm", vrmvariables);
+
+    fileurl = response.data.url;
+}
+
+loader.load(fileurl,
      (gltf) => {
          THREE.VRMUtils.removeUnnecessaryJoints(gltf.scene);
          THREE.VRM.from(gltf).then((vrm) => {
@@ -139,6 +151,7 @@ loader.load("https://cdn.glitch.com/29e07830-2317-4b15-a044-135e73c7f840%2FAshtr
 
      (error) => console.error(error)
 );
+*/
 
 // animate rotation helper function
 const rigRotation = (name, rotation = { x: 0, y: 0, z: 0}, dampener = 1, lerpAmount = 0.3) => {
@@ -539,12 +552,39 @@ function CopyClassText() {
 }
 
 
-continueButt.addEventListener('click', () => {
+continueButt.addEventListener('click', async () => {
     if (nameField.value == '') return;
     username = nameField.value;
     overlayContainer.style.visibility = 'hidden';
     document.querySelector("#myname").innerHTML = `${username} (You)`;
     socket.emit("join room", roomid, username);
+
+    let fileurl = undefined // "https://cdn.glitch.com/29e07830-2317-4b15-a044-135e73c7f840%2FAshtra.vrm?v=1630342336981";
+
+    if (nameField.value !== ""){
+        let vrmvariables = {
+            username: nameField.value
+        }
+        let response = await axios.post("http://localhost:3000/api/preview/getvrm", vrmvariables);
+        console.log(response.data.result[0].url);
+
+        fileurl = response.data.result[0].url;
+    }
+
+    loader.load(fileurl,
+        (gltf) => {
+            THREE.VRMUtils.removeUnnecessaryJoints(gltf.scene);
+            THREE.VRM.from(gltf).then((vrm) => {
+                scene.add(vrm.scene);
+                currentVrm = vrm;
+                currentVrm.scene.rotation.y = Math.PI;
+            });
+        },
+
+        (progress) => console.log("Loading model...", 100.0 * (progress.loaded / progress.total), "%"),
+
+        (error) => console.error(error)
+    );
 
 })
 

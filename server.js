@@ -5,10 +5,32 @@ const moment = require('moment');
 const socketio = require('socket.io');
 const PORT = process.env.PORT || 3000;
 
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+const cors = require('cors')
+
 const app = express();
 const server = http.createServer(app);
 
 const io = socketio(server);
+
+require('dotenv').config();
+const mongoURI = process.env.MONGOURI
+
+const mongoose = require("mongoose");
+const connect = mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+.then(() => console.log('MongoDB Connected...'))
+.catch(err => console.log(err));
+
+app.use(cors())
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(cookieParser());
+
+app.use("/api/preview", require("./routes/preview"));
+app.use("/uploads", express.static("/uploads"));
+app.use("/public/uploads", express.static("../public/uploads"));
 
 app.use(express.static(path.join(__dirname, 'public')));
 

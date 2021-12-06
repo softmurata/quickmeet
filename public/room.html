@@ -33,6 +33,7 @@
     <!--     VRM Loader for Three.js -->
     <script src="https://unpkg.com/@pixiv/three-vrm@0.6.7/lib/three-vrm.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/kalidokit@1.0.0/dist/kalidokit.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         const params = new URLSearchParams(location.search);
         if (!params.get("room")) location.href = "/";
@@ -114,8 +115,8 @@
         <div class="right-cont">
             <div class="head-title">
 
-                <div class="chats"><i class="fas fa-comment-alt mr-1"></i>Chats</div>
-                <div class="attendies"><i class="fas fa-users mr-1"></i>Attendies</div>
+                <div class="chats"><i class="fas fa-comment-alt mr-1" id="com"></i>Chats</div>
+                <!--<div class="attendies"><i class="fas fa-users mr-1"></i>Attendies</div>-->
 
 
             </div>
