@@ -10,7 +10,7 @@ const videoWidth = 640;
 const videoHeight = 480;
 
 // const deployURL = "http://localhost"
-const deployURL = "https://aqueous-sierra-30241.herokuapp.com/"  // "https://quickmeet-seven.vercel.app/" ,"https://aqueous-sierra-30241.herokuapp.com/"
+const deployURL = "https://aqueous-sierra-30241.herokuapp.com"  // "https://quickmeet-seven.vercel.app/" ,"https://aqueous-sierra-30241.herokuapp.com/"
 
 // mediapipe canvas
 const mediapipeCanvas = document.createElement("canvas");
