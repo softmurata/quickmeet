@@ -15,7 +15,7 @@ const server = http.createServer(app);
 const io = socketio(server);
 
 require('dotenv').config();
-const mongoURI = process.env.MONGOURI
+const mongoURI = "mongodb+srv://murata:murata@cluster0.11bza.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"  // process.env.MONGOURI
 
 const mongoose = require("mongoose");
 const connect = mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })

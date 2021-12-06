@@ -15,6 +15,7 @@ const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
 const whiteboardButt = document.querySelector('.board-icon')
 
+// const deployURL = "http://localhost"
 const deployURL = "https://aqueous-sierra-30241.herokuapp.com"  // "https://quickmeet-seven.vercel.app" ,"https://aqueous-sierra-30241.herokuapp.com"
 
 // mediapipe canvas
