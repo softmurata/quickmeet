@@ -15,6 +15,8 @@ const cutCall = document.querySelector('.cutcall');
 const screenShareButt = document.querySelector('.screenshare');
 const whiteboardButt = document.querySelector('.board-icon')
 
+const deployURL = "https://aqueous-sierra-30241.herokuapp.com/"  // "https://quickmeet-seven.vercel.app/" ,"https://aqueous-sierra-30241.herokuapp.com/"
+
 // mediapipe canvas
 const mediapipeCanvas = document.createElement("canvas");
 mediapipeCanvas.style.width = 640;
@@ -565,7 +567,7 @@ continueButt.addEventListener('click', async () => {
         let vrmvariables = {
             username: nameField.value
         }
-        let response = await axios.post("http://localhost:3000/api/preview/getvrm", vrmvariables);
+        let response = await axios.post(`${deployURL}:3000/api/preview/getvrm`, vrmvariables);
         console.log(response.data.result[0].url);
 
         fileurl = response.data.result[0].url;

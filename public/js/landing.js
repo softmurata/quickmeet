@@ -9,6 +9,9 @@ const vrmfile = document.querySelector("#vrmfile")
 const videoWidth = 640;
 const videoHeight = 480;
 
+// const deployURL = "http://localhost"
+const deployURL = "https://aqueous-sierra-30241.herokuapp.com/"  // "https://quickmeet-seven.vercel.app/" ,"https://aqueous-sierra-30241.herokuapp.com/"
+
 // mediapipe canvas
 const mediapipeCanvas = document.createElement("canvas");
 mediapipeCanvas.style.width = 640;
@@ -546,7 +549,7 @@ vrmfile.addEventListener("change", (e) => {
         // send vrm file
         let vrmformData = new FormData();
         vrmformData.append("file", file)
-        axios.post("/api/preview/uploadfiles", vrmformData)
+        axios.post(`${deployURL}:3000/api/preview/uploadfiles`, vrmformData)
         .then(response => {
             if (response.data.success){
                 console.log(response.data.url);
@@ -570,7 +573,7 @@ vrmfile.addEventListener("change", (e) => {
             let imgformData = new FormData();
             imgformData.append("file", newfile);
 
-            axios.post("/api/preview/uploadfiles", imgformData)
+            axios.post(`${deployURL}:3000/api/preview/uploadfiles`, imgformData)
             .then(response => {
                 if (response.data.success){
                     console.log(response.data.url);
@@ -585,7 +588,7 @@ vrmfile.addEventListener("change", (e) => {
         console.log(target);
 
         // confirmation
-        axios.get("/api/preview/hello")
+        axios.get(`${deployURL}:3000/api/preview/hello`)
         .then(response => {
             console.log(response.data.result);
         })
@@ -613,7 +616,7 @@ if (checkbutton){
             username: username 
         }
     
-        axios.post("/api/preview/getvrm", vrmvariables)
+        axios.post(`${deployURL}:3000/api/preview/getvrm`, vrmvariables)
         .then(response => {
             console.log(response);
         })
