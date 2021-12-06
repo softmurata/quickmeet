@@ -546,7 +546,7 @@ vrmfile.addEventListener("change", (e) => {
         // send vrm file
         let vrmformData = new FormData();
         vrmformData.append("file", file)
-        axios.post("http://localhost:3000/api/preview/uploadfiles", vrmformData)
+        axios.post("/api/preview/uploadfiles", vrmformData)
         .then(response => {
             if (response.data.success){
                 console.log(response.data.url);
@@ -570,7 +570,7 @@ vrmfile.addEventListener("change", (e) => {
             let imgformData = new FormData();
             imgformData.append("file", newfile);
 
-            axios.post("http://localhost:3000/api/preview/uploadfiles", imgformData)
+            axios.post("/api/preview/uploadfiles", imgformData)
             .then(response => {
                 if (response.data.success){
                     console.log(response.data.url);
@@ -585,7 +585,7 @@ vrmfile.addEventListener("change", (e) => {
         console.log(target);
 
         // confirmation
-        axios.get("http://localhost:3000/api/preview/hello")
+        axios.get("/api/preview/hello")
         .then(response => {
             console.log(response.data.result);
         })
@@ -613,7 +613,7 @@ if (checkbutton){
             username: username 
         }
     
-        axios.post("http://localhost:3000/api/preview/getvrm", vrmvariables)
+        axios.post("/api/preview/getvrm", vrmvariables)
         .then(response => {
             console.log(response);
         })
